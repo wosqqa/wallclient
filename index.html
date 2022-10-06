@@ -1,0 +1,219 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Websocket Client</title>
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div style="color: white;">
+<h1>Websocket client :</h1>
+IP/Port : <input style="color: white;" id="ipport" type="text" value="test.s3graphics.com:7681"/><br/>
+<button style="color: white;" id="connect">点击连接</button><br/><br/>
+<br/><br/>
+</div>
+<div class="main">
+  <div class="header">
+    <img src="images/top.png" class="top">
+    <div class="search">
+      <input type="text" class="txt" placeholder="请搜索模式">
+      <input type="button" class="btn" onclick="SearchProgramBasicInfo()">
+    </div>
+  </div>
+  <div class="body">
+    <!-- 左菜单 -->
+    <div class="body-lt"><img src="images/lt_style.png">
+      <div class="position">
+        <div class="menu active">
+          <div class="title"><img src="images/menu_active.png"><span>媒体</span></div>
+          <ul class="slide">
+            <li id="shiping" onclick="GetCascadeServerMediaFileList()">视频</li>
+            <li id="tupian">图片</li>
+          </ul>
+        </div>
+        <div class="menu">
+          <div class="title"><img src="images/menu_active.png"><span>设备</span></div>
+          <ul class="slide">
+            <li onclick="GetDeviceList()">摄像头</li>
+            <li>Document</li>
+            <li>video</li>
+          </ul>
+        </div>
+        <div class="menu">
+          <div class="title"><img src="images/menu_active.png"><span>控件</span></div>
+          <ul class="slide">
+            <li>滚动条</li>
+            <li>时钟</li>
+            <li>天气</li>
+          </ul>
+        </div>        
+      </div>
+    </div>
+    <!-- 右模式 -->
+    <div class="body-rt"><img src="images/rt_style.png">
+      <ul class="mode">
+        <li><span onclick="LoadProgram(0)">DEAULT</span></li>
+        <li><span>DEAULT</span></li>
+        <li><span>DEAULT</span></li>
+        <li class="active"><span>DEAULT</span></li>
+        <li><span>DEAULT</span></li>
+        <li><span>DEAULT</span></li>
+        <li class="disabled"><span>DEAULT</span></li>
+      </ul>      
+    </div>
+    <!-- 主体 -->
+    <div class="body-main">
+      <img src="images/main_bg.png">
+      <div class="screen">
+
+	  </div>
+      <div class="handle-btns">
+        <a href="javascript:void(0)" class="icon_1 active"></a><a href="javascript:void(0)" class="icon_2 disabled"></a>
+        <a href="javascript:void(0)" class="icon_3"></a><a href="javascript:void(0)" class="icon_4"></a>
+        <a href="javascript:void(0)" class="icon_5"></a><a href="javascript:void(0)" class="icon_6"></a>
+        <a href="javascript:void(0)" class="icon_7"></a><a href="javascript:void(0)" class="icon_8"></a>
+      </div>
+      <div class="handle-play">
+        <div class="btns">
+          <div class="left fl">
+            <div class="btn fl"><img src="images/play_voice.png"></div>
+          </div>
+          <div class="center">
+            <div class="btn fl" onclick="PreviousScene()"><img src="images/play_01.png"></div>
+            <div class="btn fr" onclick="NextScene()"><img src="images/play_04.png"></div>
+          </div>
+          <div class="right fr">
+            <div class="btn fr" onclick="MuteAllLayer()"><img src="images/play_off.png"></div>            
+            <div class="btn fr disabled"><img src="images/play_lock.png"></div>                 
+          </div>
+        </div>
+        <div class="btn play" onclick="PausePlayer()"><img src="images/play_00.png"></div>
+      </div>
+    </div>
+  </div>
+  <!-- 素材 -->
+  <div class="material">
+    <img src="images/su_tit.png">
+    <div class="material-swiper">
+      <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide active"><img src="images/su_img.png"></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img1.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img2.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img3.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img4.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img5.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img6.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img7.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img8.png</p></div>
+          <div class="swiper-slide"><img src="images/su_img.png"><p style="color: white;">images/su_img9.png</p></div>
+        </div>
+        <!-- Add Arrows -->
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>      
+    </div>
+  </div>
+</div>
+
+<div id="consolebox">
+</div>
+</div><!-- End demo -->
+</body>
+<script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/media.js"></script>
+<script type="text/javascript" src="js/device.js"></script>
+<script type="text/javascript" src="js/wall.js"></script>
+<script type="text/javascript" src="js/message.js"></script>
+<script type="text/javascript" src="js/prepared.js"></script>
+<script type="text/javascript">
+<!--
+//素材
+var swiper = new Swiper('.swiper-container', {
+  slidesPerView : 5,
+  slidesPerGroup : 5,
+  spaceBetween : '1%',
+  //loop : true,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+//active
+$(".menu,.menu .slide li,.mode li,.swiper-slide").click(function(){
+  if ($(this).not(".disabled")) {
+    $(this).addClass("active").siblings().removeClass("active");
+  }
+})
+
+$('#connect').click(function () {
+	initConnect();
+});
+//为按钮绑定相关的消息发送事件
+$('#echo_send').click(function () {
+	var msg = $('#echo_msg').val();
+	if (msg == "") {
+		alert("Please a message !");
+		return;
+	}
+	//socket.send(msg);
+	notifyScreenContent();
+	
+});
+
+
+//处理接收到服务器端的消息
+//根据消息类型分别调用相应的方法对返回的数据进行解析处理
+//main.js 中为websocket连接相关，用户登录相关方法
+//wall.js 中为显示墙相关的方法
+//media.js 中为媒体相关方法
+//model.js 中为模式相关方法
+//device.js 中为设备相关方法
+//message.js 中为消息相关方法
+//prepared.js 中为预案相关方法
+
+//说明：方法名以 Do 为后缀的表示用于处理对应服务器端推送过来的消息事件
+//目前因为不清楚服务端推送过来的消息中数据结构的意思，所以方法中只是打印了日志，有等具体实现
+
+function doMsg(str){
+	var obj = JSON.parse(str);
+	if(!obj){
+		return;
+	}
+	var msgtype = obj.type;
+	switch (msgtype) {
+
+		case "QUERYUSERLOGIN":
+			QueryUserLoginTableDo(obj);
+			break;
+		case "GETSCREENCONTENT":
+			notifyScreenContentToDo(obj);
+			break;
+		case "HOSTSERVERHWINFO":
+			OutputLog('HOSTSERVERHWINFO');
+			break;
+		case "GETCASCADESERVERMEDIAFILELIST":
+			GetCascadeServerMediaFileListDo(obj);
+			break;
+		case "GETDEVICELIST":
+			GetDeviceListDo(obj);
+			break;
+		case "SEARCHPROGRAMBASICINFO":
+			SearchProgramBasicInfoDo(obj);
+			break;
+		case "LOADPROGRAM":
+			LoadProgramDo(obj);
+			break;
+
+
+
+		default:;
+	}
+}
+//-->
+</script>
+
+</html>

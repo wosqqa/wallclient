@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    #canvas {
+      border: 1px solid red;
+    }
+
+    .btn {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-around;
+      margin: 30px 0;
+    }
+
+    .btn>div {
+      width: 100px;
+      font-size: 30px;
+      padding: 10px 15px;
+      border: 1px solid rebeccapurple;
+      text-align: center;
+    }
+
+    .bg {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      margin-top: 20px;
+    }
+
+    .bg>div {
+      width: 150px;
+      height: 150px;
+      font-size: 30px;
+      border: 1px solid rebeccapurple;
+      padding: 10px 15px;
+      margin-right: 20px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="canvas" width="1000" height="850" ondrop="canvasDrop()"></canvas>
+  http://www.mamicode.com/info-detail-2244554.html API描述
+  https://blog.csdn.net/daicooper/article/details/79800718 方法实例
+  <script src="js/fabric.js"></script>
+  <script>
+    var canvas = new fabric.Canvas('canvas');
+      var img = document.createElement("img");
+      img.onload = function () {
+        var canvasImage = newfabric.Image(img, {
+          left: 0,
+          top: 0,
+          width: 0,
+          height: 0,
+          zIndex: 1
+        })
+        canvas.add(canvasImage)
+        for (var b = 0; b < canvas._objects.length; b++) {
+          if (canvasImage.zIndex > canvas._objects[b].zIndex) {
+            canvas.bringForward(canvasImage);    //上移
+          } else {
+            canvas.sendBackwards(canvasImage); //下移
+          }
+        }
+      }
+
+      img.crossOrigin = 'Anonymous'; //记得加上，不然会出现画布污染（Uncaught DOMException: Failed to execute 'toDataURL' on 'HTMLCanvasElement': Tainted canvases may not be exported）等错误
+      img.src = 'http://cdn2.jianshu.io/assets/web/logo-58fd04f6f0de908401aa561cda6a0688.png';
+
+      var text = new fabric.IText('hello', {
+        left: 0,
+        top: 0,
+        width: 20,
+        height: 20,
+        fill: '#000',
+        fontSize: 20,
+        zIndex: 2
+      })
+      canvas.add(text)
+  </script>
+</body>
+
+</html>
