@@ -1,3 +1,4 @@
+//demo.html 中fabric.js简单实例
 //index.html 中 doMsg(str) 方法为处理接收到服务器端的消息入口
 //根据消息类型分别调用相应的方法对返回的数据进行解析处理
 //main.js 中为websocket连接相关，用户登录相关方法
